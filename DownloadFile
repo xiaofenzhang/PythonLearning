@@ -1,1 +1,30 @@
 
+# Download file from server through URL by Python
+# 方法一： 
+import urllib 
+import os
+print "downloading with urllib"
+url = 'http://www.python.org/ftp/python/2.7.5/Python-2.7.5.tar.bz2'
+Local = os.path.join('C:\Users\zxf\PycharmProjects\PychonLearning\Funtion\Test','Python-2.7.5.tar.bz2')
+def progress(a,b,c):
+    '''a:已经下载的数据块 b:数据块的大小 c:远程文件的大小'''
+    per = 100.0 * a * b / c
+    if per > 100 :
+        per = 100
+    print '%.2f%%' % per
+urllib.urlretrieve(url, Local,progress)
+# 方法二：
+import urllib2
+print "downloading with urllib2"
+url = 'http://www.python.org/ftp/python/2.7.5/Python-2.7.5.tar.bz2'
+f = urllib2.urlopen(url) 
+data = f.read() 
+with open("Python-2.7.5.tar.bz2", "wb") as code:   
+    code.write(data)
+# 方法三：(这个好)
+import requests 
+print "downloading with requests"
+url = 'http://www.python.org/ftp/python/2.7.5/Python-2.7.5.tar.bz2'
+r = requests.get(url) 
+with open("Python-2.7.5.tar.bz2", "wb") as code:
+   code.write(r.content)
